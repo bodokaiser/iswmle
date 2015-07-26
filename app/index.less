@@ -28,4 +28,41 @@
 @import "@{path-bootswatch}bootswatch.less";
 @import "@{path-bootswatch}variables.less";
 
-@import "styles.less";
+@body-bg: #6f7070;
+
+@brand-primary: #7e959c;
+@brand-success: #96D096;
+@brand-danger:  #EC6F64;
+
+@navbar-height: 50px;
+@navbar-default-bg: @brand-primary;
+@navbar-margin-bottom: 0;
+
+@list-group-bg:       darken(@brand-primary, 10%);
+@list-group-hover-bg: darken(@brand-primary, 20%);
+
+@headings-font-weight: 400;
+
+.btn {
+    transition: .5s;
+}
+
+.btn-group-justified {
+    padding-top: 10px;
+}
+
+.list-group-item {
+    transition: .3s;
+}
+
+/*
+@padding-xs-horizontal: 0;
+@padding-base-horizontal: 0;
+@padding-small-horizontal: 0;
+@padding-large-horizontal: 0;
+*/
+
+.col-xs-8, .col-xs-4,
+.container-fluid {
+    padding: 0;
+}
