@@ -1,8 +1,14 @@
-import {tree, render} from 'dekujs/deku'
-import element        from 'dekujs/virtual-element'
+import {tree, render} from 'dekujs/deku';
+import element        from 'dekujs/virtual-element';
 
-import Sidebar from './sidebar'
+import routes from './routes';
+import images from './images';
+import layout from './layout';
 
-var app = tree(<Sidebar heading="foo" description="bar" />)
+let app = tree();
 
-render(app, document.querySelector('.list-group'))
+app.use(routes);
+//app.use(layout);
+app.use(images);
+
+render(app, document.querySelector('main'));
