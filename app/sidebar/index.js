@@ -1,12 +1,11 @@
-/*
-import {tree, element} from "dekujs/deku"
+import element from 'dekujs/virtual-element'
 
-export function render(component) {
-    let {probs, state} = component
+export default function render(component) {
+    let {props} = component
 
     return <a class="list-group-item">
-        <h4 class="list-group-item-heading">{probs.heading}</h4>
-        <p class="list-group-item-text">{probs.description}</p>
+        <h4 class="list-group-item-heading">{props.heading}</h4>
+        <p class="list-group-item-text">{props.description}</p>
         <div class="btn-group btn-group-justified">
           <div class="btn-group">
             <button class="btn btn-sm btn-success" type="button">Yes</button>
@@ -17,4 +16,3 @@ export function render(component) {
         </div>
       </a>
 }
-*/
