@@ -7,13 +7,14 @@
     "repository": "bodokaiser/iswmle",
 
     "dependencies": {
-        "roo": "^0.4.2",
-        "duo": "^0.14.1",
+        "roo": "^0.4.3",
+        "duo": "^0.15.2",
         "duo-less": "^0.0.2",
         "duo-babel": "^6.0.0",
         "raw-body": "^1.3.4",
         "bootstrap": "^3.3.5",
-        "bootswatch": "^3.3.5"
+        "bootswatch": "^3.3.5",
+        "supervisor": "^0.7.1"
     }
 
 }

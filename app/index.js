@@ -1,5 +1,9 @@
-import drop    from 'component/drop';
-import file    from 'component/file';
-import query   from 'component/query';
+//import {tree, render} from "dekujs/deku"
 
-console.log('booted');
+import Sidebar from "./sidebar"
+
+//var app = tree(<Sidebar title="foo" description="bar"/>)
+//var app = tree()
+
+
+//render(app, document.querySelector('.list-group'))
