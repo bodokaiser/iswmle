@@ -12,7 +12,7 @@ let ImageItem = {
     let {props} = component;
 
     return <div class="col-xs-4">
-      <a class="thumbnail" href="#">
+      <a class="thumbnail" href={'/' + props.image.id}>
         <img class="img-rounded" src={props.image.src} />
       </a>
     </div>;
