@@ -1,7 +1,18 @@
 # I Spy With My Little Eye
 
-Web-based implementation of the publication [Segmentation in 20 Questions][publication]
-from [Christian Rupprecht][profile]
+Web-based implementation of the publication [Segmentation in 20 Questions][pub]
+from [Christian Rupprecht][pro].
+
+## Todos
+
+- [ ] adjust canvas to windows size
+- [ ] show random point in canvas
+- [ ] mark random point with color on keypress
+
+## Ideas
+
+- Upload custom images
+- Add speech interface
 
 ## License
 
@@ -26,5 +37,5 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[profile]:http://campar.in.tum.de/Main/ChristianRupprecht
-[publication]:http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Rupprecht_Image_Segmentation_in_2015_CVPR_paper.pdf
+[pro]:http://campar.in.tum.de/Main/ChristianRupprecht
+[pub]:http://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Rupprecht_Image_Segmentation_in_2015_CVPR_paper.pdf
