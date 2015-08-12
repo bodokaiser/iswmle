@@ -1,15 +1,25 @@
 import {tree, render} from 'dekujs/deku';
+import element        from 'dekujs/virtual-element';
 
+import model  from './model';
 import events from './events';
-import routes from './routes';
-import images from './images';
-import canvas from './canvas';
+import router from './router';
+
+import Board  from './views/board';
+import Canvas from './views/canvas';
 
 let app = tree();
 
+app.use(model);
 app.use(events);
-app.use(images);
-app.use(canvas);
-app.use(routes);
+app.use(router);
+
+app.on('route:index', () => {
+  app.mount(<Board />);
+});
+
+app.on('route:image', () => {
+  app.mount(<Canvas />);
+});
 
 render(app, document.querySelector('main'));

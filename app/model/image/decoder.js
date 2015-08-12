@@ -99,12 +99,7 @@ var JpegImage = function jpegImage() {
     return JpegImage;
 }();
 
-module.exports = {
-    JpegImage: JpegImage,
-    JpegDecoder: JpegDecoder,
-    JpxDecoder: JpxDecoder,
-    Jbig2Decoder: Jbig2Decoder
-};
+export default JpegImage;
 
 var PDFJS;
 

@@ -9,6 +9,10 @@ from [Christian Rupprecht][pro].
 - [ ] show random point in canvas
 - [ ] mark random point with color on keypress
 
+### Various
+
+- [ ] rename `.js` files to `.jsx`
+
 ## Ideas
 
 - Upload custom images
