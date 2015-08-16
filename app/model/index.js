@@ -10,6 +10,7 @@ const images = [
 ].map(image => new Image(image.id, image.src));
 
 export default function(app) {
+
   app.on('source', (name, params) => {
     if (name !== 'params') return;
 
@@ -18,12 +19,20 @@ export default function(app) {
     });
 
     image.fromUrl(() => {
-      let seed = new State(image)
-        .sampleSeed()
-        .currentSeed();
+      let state = new State(image);
+
+      let seed = state
+        .sampleSeed();
 
       app.set('image', image);
-      app.set('seed', seed);
+      app.set('seeds', [seed]);
+
+      app.on('key:confirm', bool => {
+        app.set('seeds', [
+          state.confirmSeed(bool),
+          state.sampleSeed()
+        ]);
+      });
     });
   });
 

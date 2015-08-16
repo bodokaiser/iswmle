@@ -7,7 +7,7 @@ from [Christian Rupprecht][pro].
 
 - [ ] adjust canvas to windows size
 - [x] show random point in canvas
-- [ ] mark random point with color on keypress
+- [x] mark random point with color on keypress
 
 ## Ideas
 
