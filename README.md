@@ -6,12 +6,8 @@ from [Christian Rupprecht][pro].
 ## Todos
 
 - [ ] adjust canvas to windows size
-- [ ] show random point in canvas
+- [x] show random point in canvas
 - [ ] mark random point with color on keypress
-
-### Various
-
-- [ ] rename `.js` files to `.jsx`
 
 ## Ideas
 
