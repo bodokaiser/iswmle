@@ -1,21 +1,16 @@
 import element from 'dekujs/virtual-element';
 
-const COLOR_NEUTRAL  = '#5A71E0';
-const COLOR_POSITIVE = '#5AE083';
-const COLOR_NEGATIVE = '#E05A5A';
-
 let Canvas = {
 
   initialState() {
     return {
-      pasted: false,
-      seeded: false
+      pasted: false
     };
   },
 
   propTypes: {
     image: { source: 'image' },
-    seed: { source: 'seed' }
+    seeds: { source: 'seeds' }
   },
 
   render() {
@@ -23,19 +18,18 @@ let Canvas = {
   },
 
   afterRender({props, state}, element) {
-    var {image, seed} = props;
-    let {pasted, seeded} = state;
+    let {pasted} = state;
+    var {image, seeds} = props;
 
-    if (image && !pasted) image.pasteToCanvas(element);
-    if (seed && !seeded) drawSeed(seed, element);
+    if (image && !pasted) initCanvas(image, element);
+    if (seeds) seeds.forEach(seed => drawSeed(seed, element));
   },
 
   afterUpdate(component, props, state, send) {
-    let {image, seed} = props;
-    let {pasted, seeded} = state;
+    let {pasted} = component.state;
+    let {image} = component.props;
 
     if (image && !pasted) send({ pasted: true });
-    if (seed && !seeded) send({ seeded: true });
   }
 
 };
@@ -45,6 +39,15 @@ export default Canvas;
 function drawSeed(seed, element) {
   let context = element.getContext('2d');
 
-  context.fillStyle = COLOR_NEUTRAL;
+  context.fillStyle = seed.color;
   context.fillRect(seed.x, seed.y, 8, 8);
+}
+
+function initCanvas(image, element) {
+  element.width = image.width;
+  element.height = image.height;
+
+  element
+    .getContext('2d')
+    .drawImage(image, 0, 0);
 }

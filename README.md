@@ -5,17 +5,12 @@ from [Christian Rupprecht][pro].
 
 ## Todos
 
-- [ ] adjust canvas to windows size
-- [ ] show random point in canvas
-- [ ] mark random point with color on keypress
-
-### Various
-
-- [ ] rename `.js` files to `.jsx`
+- [ ] improve design of seeds
+- [ ] improve color scheme
+- [ ] add "custom image" area to `<Board />`
 
 ## Ideas
 
-- Upload custom images
 - Add speech interface
 
 ## License

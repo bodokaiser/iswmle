@@ -17,13 +17,19 @@ class State {
 
     this.seeds.push(new Seed(x, y));
 
-    return this;
+    return this.currentSeed();
   }
 
   currentSeed() {
     return this.seeds
       .slice(-1)
       .pop();
+  }
+
+  confirmSeed(bool) {
+    return this
+      .currentSeed()
+      .confirm(bool);
   }
 
 }
