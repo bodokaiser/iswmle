@@ -1,5 +1,4 @@
 import State from './state';
-import Image from './image';
 
 const images = [
   { id: 1, src: '/images/sample.jpg' },
@@ -7,10 +6,9 @@ const images = [
   { id: 3, src: '/images/sample.jpg' },
   { id: 4, src: '/images/sample.jpg' },
   { id: 5, src: '/images/sample.jpg' }
-].map(image => new Image(image.id, image.src));
+].map(imageify);
 
 export default function(app) {
-
   app.on('source', (name, params) => {
     if (name !== 'params') return;
 
@@ -18,7 +16,13 @@ export default function(app) {
       return image.id == params.id;
     });
 
-    image.fromUrl(() => {
+    if (image.complete) {
+      initImage();
+    } else {
+      image.onload = initImage;
+    }
+
+    function initImage() {
       let state = new State(image);
 
       let seed = state
@@ -33,8 +37,17 @@ export default function(app) {
           state.sampleSeed()
         ]);
       });
-    });
-  });
+    }
 
-  app.set('images', images);
+    app.set('images', images);
+  });
+}
+
+function imageify(image) {
+  let el = new Image();
+
+  el.id = image.id;
+  el.src = image.src;
+
+  return el;
 }
