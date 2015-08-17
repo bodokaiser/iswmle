@@ -38,9 +38,9 @@ export default function(app) {
         ]);
       });
     }
-
-    app.set('images', images);
   });
+  
+  app.set('images', images);
 }
 
 function imageify(image) {
