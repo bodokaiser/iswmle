@@ -46,7 +46,7 @@ function drawSeed(seed, element) {
 function initCanvas(image, element) {
   element.width = image.width;
   element.height = image.height;
-  
+
   element
     .getContext('2d')
     .drawImage(image, 0, 0);
