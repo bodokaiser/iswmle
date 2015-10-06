@@ -1,3 +1,5 @@
+import geod from 'bodokaiser/geod'
+
 import Seed from './seed';
 
 class State {

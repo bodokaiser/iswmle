@@ -47,6 +47,8 @@ function initCanvas(image, element) {
   element.width = image.width;
   element.height = image.height;
 
+  window.ctx = element.getContext('2d');
+
   element
     .getContext('2d')
     .drawImage(image, 0, 0);
