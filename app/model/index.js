@@ -1,4 +1,4 @@
-import State from './state';
+import State from './state'
 
 const images = [
   { id: 1, src: '/images/sample.jpg' },
@@ -6,48 +6,48 @@ const images = [
   { id: 3, src: '/images/sample.jpg' },
   { id: 4, src: '/images/sample.jpg' },
   { id: 5, src: '/images/sample.jpg' }
-].map(imageify);
+].map(imageify)
 
 export default function(app) {
   app.on('source', (name, params) => {
-    if (name !== 'params') return;
+    if (name !== 'params') return
 
     var image = images.find(image => {
-      return image.id == params.id;
+      return image.id == params.id
     });
 
     if (image.complete) {
-      initImage();
+      initImage()
     } else {
-      image.onload = initImage;
+      image.onload = initImage
     }
 
     function initImage() {
-      let state = new State(image);
+      let state = new State(image)
 
       let seed = state
-        .sampleSeed();
+        .sampleSeed()
 
-      app.set('image', image);
-      app.set('seeds', [seed]);
+      app.set('image', image)
+      app.set('seeds', [seed])
 
       app.on('key:confirm', bool => {
         app.set('seeds', [
           state.confirmSeed(bool),
           state.sampleSeed()
-        ]);
-      });
+        ])
+      })
     }
-  });
-  
-  app.set('images', images);
+  })
+
+  app.set('images', images)
 }
 
 function imageify(image) {
-  let el = new Image();
+  let el = new Image()
 
-  el.id = image.id;
-  el.src = image.src;
+  el.id = image.id
+  el.src = image.src
 
-  return el;
+  return el
 }
