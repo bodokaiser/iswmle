@@ -20,6 +20,10 @@ let Images = {
     images: { source: 'images' }
   },
 
+  defaultProp: {
+    images: []
+  },
+
   render({props}) {
     let images = props.images.map(image => {
       return <Image image={image} />
