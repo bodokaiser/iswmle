@@ -2,6 +2,8 @@ import avdown from 'bodokaiser/avdown'
 
 import Emitter from 'component/emitter'
 
+const MAX = 0xffffff
+
 const KERNEL_SIZE = 7
 
 const COLOR_NEUTRAL  = '#5A71E0';
@@ -48,7 +50,11 @@ class Container extends Emitter {
       this.rwidth = r[1]
       this.rheight = r[2]
 
-      return r[0]
+      let d = [0, 0].map(() => new Uint32Array(r[1]*r[2]))
+
+      d.forEach(a => a.fill(MAX))
+
+      return { weight: r[0], distance: d }
     })
 
     this.sampleSeed()
@@ -70,10 +76,16 @@ class Container extends Emitter {
   }
 
   confirmSeed(bool) {
+    let [x, y] = this.current
+
     this.emit('seed', {
-      x: this.current[0] * KERNEL_SIZE,
-      y: this.current[1] * KERNEL_SIZE,
+      x: x * KERNEL_SIZE,
+      y: y * KERNEL_SIZE,
       color: (bool) ? COLOR_POSITIVE : COLOR_NEGATIVE
+    })
+
+    this.colors.forEach(c => {
+      c.distance[(bool) ? 0 : 1][x + y * this.rwidth] = 0
     })
 
     return this

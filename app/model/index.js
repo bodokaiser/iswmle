@@ -15,7 +15,7 @@ export default function(app) {
     app.set('image', images.find(i => i.id == p.image))
   })
   app.on('key:confirm', b => {
-    let {image} = app.sources
+    let {image} = window.image = app.sources
 
     if (image) image.confirmSeed(b).sampleSeed()
   })
