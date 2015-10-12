@@ -14,4 +14,9 @@ export default function(app) {
   app.on('route:image', p => {
     app.set('image', images.find(i => i.id == p.image))
   })
+  app.on('key:confirm', b => {
+    let {image} = app.sources
+
+    if (image) image.confirmSeed(b).sampleSeed()
+  })
 }

@@ -2,6 +2,12 @@ import avdown from 'bodokaiser/avdown'
 
 import Emitter from 'component/emitter'
 
+const KERNEL_SIZE = 7
+
+const COLOR_NEUTRAL  = '#5A71E0';
+const COLOR_POSITIVE = '#5AE083';
+const COLOR_NEGATIVE = '#E05A5A';
+
 class Container extends Emitter {
 
   constructor(id, src) {
@@ -36,13 +42,47 @@ class Container extends Emitter {
     this.colors = c.map(c => {
       let r = avdown(w, h)
         .image(c)
-        .kernel(7)
+        .kernel(KERNEL_SIZE)
         .transform()
 
-      return { data: r[0], width: r[1], height: r[2] }
+      this.rwidth = r[1]
+      this.rheight = r[2]
+
+      return r[0]
     })
+
+    this.sampleSeed()
+  }
+
+  sampleSeed() {
+    this.current = [
+      random(0, this.rwidth),
+      random(0, this.rheight)
+    ]
+
+    this.emit('seed', {
+      x: this.current[0] * KERNEL_SIZE,
+      y: this.current[1] * KERNEL_SIZE,
+      color: COLOR_NEUTRAL
+    })
+
+    return this
+  }
+
+  confirmSeed(bool) {
+    this.emit('seed', {
+      x: this.current[0] * KERNEL_SIZE,
+      y: this.current[1] * KERNEL_SIZE,
+      color: (bool) ? COLOR_POSITIVE : COLOR_NEGATIVE
+    })
+
+    return this
   }
 
 }
 
 export default Container
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
