@@ -1,3 +1,4 @@
+import geod   from 'bodokaiser/geod'
 import avdown from 'bodokaiser/avdown'
 
 import Emitter from 'component/emitter'
@@ -89,6 +90,42 @@ class Container extends Emitter {
     })
 
     return this
+  }
+
+  transform() {
+    let b = new Uint8ClampedArray(this.width * this.height)
+
+    this.colors.forEach(c => {
+      let w = c.weight
+
+      c.distance.forEach(d => {
+        // for some reason this does not exec properly!
+        // there may be a problem with the weights
+        // however this problem needs further investigation
+        // it can be that the weight is a problem as we did not
+        // tested it with geod
+
+        geod(this.rwidth, this.rheight)
+          //.weight(w)
+          .distance(d)
+          .transform()
+      })
+    })
+
+    for (let i = 0; i < this.rwidth * this.rheight; i++) {
+      let d = this.colors
+        .map(c => c.distance)
+        .map(d => d[1][i] - d[0][i])
+        .reduce((p, v) => p + v)
+
+      if (d > 0) {
+        b.set([1, 1, 1], i)
+        b.set([1, 1, 1], i + 1*this.width)
+        b.set([1, 1, 1], i + 2*this.width)
+      }
+    }
+
+    this.emit('segment', b)
   }
 
 }
