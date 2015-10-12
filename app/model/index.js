@@ -14,8 +14,14 @@ export default function(app) {
   app.on('route:image', p => {
     app.set('image', images.find(i => i.id == p.image))
   })
+
+  app.on('key:exec', () => {
+    let {image} = app.sources
+
+    if (image) image.transform()
+  })
   app.on('key:confirm', b => {
-    let {image} = window.image = app.sources
+    let {image} = app.sources
 
     if (image) image.confirmSeed(b).sampleSeed()
   })
