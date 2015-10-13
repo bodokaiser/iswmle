@@ -93,20 +93,15 @@ class Container extends Emitter {
   }
 
   transform() {
-    let b = new Uint8ClampedArray(this.width * this.height)
+    let b = new Uint8ClampedArray(this.width * this.height).fill(0)
 
     this.colors.forEach(c => {
       let w = c.weight
 
       c.distance.forEach(d => {
-        // for some reason this does not exec properly!
-        // there may be a problem with the weights
-        // however this problem needs further investigation
-        // it can be that the weight is a problem as we did not
-        // tested it with geod
-
         geod(this.rwidth, this.rheight)
-          //.weight(w)
+          .iters(4)
+          .weight(w)
           .distance(d)
           .transform()
       })
@@ -119,9 +114,12 @@ class Container extends Emitter {
         .reduce((p, v) => p + v)
 
       if (d > 0) {
-        b.set([1, 1, 1], i)
-        b.set([1, 1, 1], i + 1*this.width)
-        b.set([1, 1, 1], i + 2*this.width)
+        let x = KERNEL_SIZE * (i % this.rwidth)
+        let y = KERNEL_SIZE * Math.floor(i / this.rwidth)
+
+        b.set([1, 1, 1, 1, 1, 1, 1], x + y * this.width)
+        b.set([1, 1, 1, 1, 1, 1, 1], x + (y+1) * this.width)
+        b.set([1, 1, 1, 1, 1, 1, 1], x + (y+2) * this.width)
       }
     }
 

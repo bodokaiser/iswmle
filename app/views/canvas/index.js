@@ -37,8 +37,10 @@ let Canvas = {
     function paintSegment(segment) {
       for (let j = 0; j < image.height; j++) {
         for (let i = 0; i < image.width; i++) {
-          state.ctx.fillStyle = DARKEN
-          state.ctx.fillRect(i, j, 1, 1)
+          if (segment[i + j * image.width] === 0) {
+            state.ctx.fillStyle = DARKEN
+            state.ctx.fillRect(i, j, 1, 1)
+          }
         }
       }
     }
