@@ -120,18 +120,23 @@ var _viewsCanvas = require('./views/canvas');
 
 var _viewsCanvas2 = _interopRequireDefault(_viewsCanvas);
 
-var app = window.app = (0, _dekujsDeku.tree)();
+console.log('booting')
+
+var app = (0, _dekujsDeku.tree)();
 
 app.use(_model2['default']);
 app.use(_events2['default']);
 app.use(_router2['default']);
 
 app.on('route:index', function (p) {
+  console.log('route:index')
   return app.mount((0, _dekujsVirtualElement2['default'])(_viewsBoard2['default'], null));
 });
 app.on('route:image', function (p) {
   return app.mount((0, _dekujsVirtualElement2['default'])(_viewsCanvas2['default'], null));
 });
+window.app = app;
+//app.router.start();
 
 (0, _dekujsDeku.render)(app, document.querySelector('main'));
 }, {"dekujs/deku":2,"dekujs/virtual-element":3,"./model":4,"./events":5,"./router":6,"./views/board":7,"./views/canvas":8}],
@@ -3499,14 +3504,16 @@ var _ianstormtaylorRouter = require('ianstormtaylor/router');
 var _ianstormtaylorRouter2 = _interopRequireDefault(_ianstormtaylorRouter);
 
 exports['default'] = function (app) {
-  window.app = app
-  app.router = new _ianstormtaylorRouter2['default']().on('/', function (c) {
+  app.router = new _ianstormtaylorRouter2['default']()
+  app.router.on('/iswmle', function (c) {
     console.log('index')
     return app.emit('route:index');
-  }).on('/:image', function (c) {
+  })
+  app.router.on('/iswmle/:image', function (c) {
     console.log('imag')
     return app.emit('route:image', c.params);
-  }).listen();
+  });
+  app.router.listen()
 };
 
 module.exports = exports['default'];
@@ -3959,7 +3966,7 @@ var pattern = /(\w+)\[(\d+)\]/;
 
 /**
  * Safely encode the given string
- * 
+ *
  * @param {String} str
  * @return {String}
  * @api private
@@ -3975,7 +3982,7 @@ var encode = function encode(str) {
 
 /**
  * Safely decode the string
- * 
+ *
  * @param {String} str
  * @return {String}
  * @api private
@@ -4426,14 +4433,14 @@ module.exports = function (arr, obj) {
 
 /**
  * prevent default on the given `e`.
- * 
+ *
  * examples:
- * 
+ *
  *      anchor.onclick = prevent;
  *      anchor.onclick = function(e){
  *        if (something) return prevent(e);
  *      };
- * 
+ *
  * @param {Event} e
  */
 
@@ -5058,15 +5065,15 @@ Ware.prototype.run = function () {
 
 /**
  * stop propagation on the given `e`.
- * 
+ *
  * examples:
- * 
+ *
  *      anchor.onclick = require('stop');
  *      anchor.onclick = function(e){
  *        if (!some) return require('stop')(e);
  *      };
- * 
- * 
+ *
+ *
  * @param {Event} e
  */
 
@@ -5101,7 +5108,7 @@ var Image = {
       { "class": "col-xs-4" },
       (0, _dekujsVirtualElement2["default"])(
         "a",
-        { "class": "thumbnail", href: '/' + image.id },
+        { "class": "thumbnail", href: '/iswmle/' + image.id },
         (0, _dekujsVirtualElement2["default"])("img", { "class": "img-rounded", src: image.src })
       )
     );
@@ -5121,6 +5128,7 @@ var Images = {
 
   render: function render(_ref2) {
     var props = _ref2.props;
+    console.log('props', props)
 
     var images = props.images.map(function (image) {
       return (0, _dekujsVirtualElement2["default"])(Image, { image: image });
